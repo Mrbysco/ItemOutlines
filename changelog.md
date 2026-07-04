@@ -1,0 +1,1 @@
+* Fix a potential crash when a dye is used in a Create Deployer
