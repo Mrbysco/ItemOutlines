@@ -3,7 +3,7 @@ package com.mrbysco.itemoutlines.config;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mrbysco.itemoutlines.ItemOutlinesMod;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.fml.loading.FMLPaths;
 
 import java.io.File;
@@ -17,7 +17,7 @@ public class ConfigHandler {
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	public static final File JSON_DIR = new File(FMLPaths.CONFIGDIR.get().toFile() + "/itemoutlines");
 
-	public static final Map<ResourceLocation, Integer> ITEM_COLOR_MAP = new HashMap<>();
+	public static final Map<Identifier, Integer> ITEM_COLOR_MAP = new HashMap<>();
 
 	private static void createDefaultConfig() {
 		ItemColor defaultColor = new ItemColor("#d8e0d4", new String[]{"minecraft:nether_star"});
@@ -58,7 +58,7 @@ public class ConfigHandler {
 				int color = parseColor(itemColor.color());
 				if (itemColor.items() != null) {
 					for (String item : itemColor.items()) {
-						ResourceLocation location = ResourceLocation.tryParse(item);
+						Identifier location = Identifier.tryParse(item);
 						if (location == null) {
 							ItemOutlinesMod.LOGGER.error("Invalid item location '{}' in {}.", item, fileName);
 						} else if (ITEM_COLOR_MAP.containsKey(location)) {
